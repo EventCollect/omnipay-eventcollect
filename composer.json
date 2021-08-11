@@ -1,0 +1,42 @@
+{
+    "name": "eventcollect/omnipay-eventcollect",
+    "description": "EventCollect driver for the Omnipay PHP payment processing library",
+    "keywords": [
+        "omnipay",
+        "eventcollect"
+    ],
+    "homepage": "https://github.com/EventCollect/omnipay-eventcollect",
+    "license": "MIT",
+    "authors": [],
+    "require": {
+        "php": "^8.0",
+        "omnipay/common": "^3"
+    },
+    "require-dev": {
+        "omnipay/tests": "^4.1",
+        "phpro/grumphp": "^1.4",
+        "squizlabs/php_codesniffer": "^3.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Omnipay\\EventCollect\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "League\\EventCollect\\Test\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit --coverage-text",
+        "check-style": "phpcs -p --standard=PSR2 src/",
+        "fix-style": "phpcbf -p --standard=PSR2 src/"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

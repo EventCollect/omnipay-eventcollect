@@ -1,0 +1,5 @@
+grumphp:
+    tasks:
+        phpcs: ~
+        phpunit:
+            always_execute: true
