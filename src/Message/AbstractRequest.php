@@ -8,7 +8,7 @@ class AbstractRequest extends BaseAbstractRequest
 {
 
     protected $liveEndpoint = 'https://event-collect-api-itfys.ondigitalocean.app';
-    protected $testEndpoint = 'http://api.eventcollect.test';
+    protected $testEndpoint = 'https://event-collect-api-itfys.ondigitalocean.app';
 
     public function getApiKey(): ?string
     {
