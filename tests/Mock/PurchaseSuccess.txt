@@ -1,0 +1,23 @@
+HTTP/1.1 201 Created
+Server: nginx/1.18.0 (Ubuntu)
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+Cache-Control: no-cache, private
+Date: Wed, 11 Aug 2021 17:41:07 GMT
+
+{
+    "data": {
+        "id": "b6ae47cd-7113-442b-a7e5-34b8b6138636",
+        "amount": 9.99,
+        "created": 1628703667,
+        "currency": null,
+        "invoice": {
+            "id": "d09c7dbe-fe5a-40f8-93e2-676561157a7f",
+            "amount": 9.99,
+            "created": 1628703667
+        }
+    },
+    "type": "object",
+    "url": "/charges"
+}

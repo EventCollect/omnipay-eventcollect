@@ -1,5 +1,6 @@
 grumphp:
     tasks:
-        phpcs: ~
+        phpcs:
+            standard: PSR12
         phpunit:
             always_execute: true

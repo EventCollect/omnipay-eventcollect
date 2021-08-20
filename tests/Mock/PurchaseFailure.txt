@@ -1,0 +1,16 @@
+HTTP/1.1 422 Unprocessable Entity
+Server: nginx/1.18.0 (Ubuntu)
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+Cache-Control: no-cache, private
+Date: Wed, 11 Aug 2021 17:51:45 GMT
+
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "currency": [
+            "The selected currency (USD) is invalid for this transaction."
+        ]
+    }
+}
