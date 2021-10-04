@@ -17,11 +17,17 @@ class Response extends AbstractResponse
 
     public function getMessage()
     {
-        if (!isset($this->data['errors'])) {
+        if (empty($this->data['errors'])) {
             return null;
         }
 
-        return current($this->data['errors'])[0];
+        $firstErrorGroup = current($this->data['errors']);
+
+        if ($firstErrorGroup === false) {
+            return null;
+        }
+
+        return $firstErrorGroup[0];
     }
 
     /**
