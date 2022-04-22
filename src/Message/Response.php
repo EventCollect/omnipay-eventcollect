@@ -37,4 +37,9 @@ class Response extends AbstractResponse
     {
         return $this->data['data']['id'] ?? null;
     }
+
+    public function getCustomerReference()
+    {
+        return $this->data['data']['id'] ?? null;
+    }
 }
