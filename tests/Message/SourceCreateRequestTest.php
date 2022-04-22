@@ -6,7 +6,7 @@ use Omnipay\Common\CreditCard;
 use Omnipay\EventCollect\Message\SourceCreateRequest;
 use Omnipay\Tests\TestCase;
 
-class CreateSourceRequestTest extends TestCase
+class SourceCreateRequestTest extends TestCase
 {
     private $request;
 
