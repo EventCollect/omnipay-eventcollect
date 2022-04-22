@@ -7,6 +7,7 @@ use Omnipay\Common\Message\NotificationInterface;
 use Omnipay\Common\Message\RequestInterface;
 use Omnipay\EventCollect\Message\CustomerCreateRequest;
 use Omnipay\EventCollect\Message\PurchaseRequest;
+use Omnipay\EventCollect\Message\SourceCreateRequest;
 
 /**
  * @method NotificationInterface acceptNotification(array $options = array())
@@ -55,6 +56,11 @@ class Gateway extends AbstractGateway
     public function createCustomer(array $options = [])
     {
         return $this->createRequest(CustomerCreateRequest::class, $options);
+    }
+
+    public function createSource(array $options = [])
+    {
+        return $this->createRequest(SourceCreateRequest::class, $options);
     }
 
     public function purchase(array $options = [])
