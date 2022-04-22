@@ -45,10 +45,7 @@ class SourceCreateRequest extends AbstractRequest
     public function getData(): array
     {
         $this->validate('customer');
-//ajax_dd([
-//    'card' => $this->getCardDetails(),
-//    'customer' => $this->getCustomer(),
-//]);
+
         return [
             'card' => $this->getCardDetails(),
             'customer' => $this->getCustomer(),
