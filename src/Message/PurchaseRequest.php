@@ -9,6 +9,16 @@ class PurchaseRequest extends AbstractRequest
         return sprintf('%s/charges', parent::getEndpoint());
     }
 
+    public function getSource(): ?string
+    {
+        return $this->getParameter('source');
+    }
+
+    public function setSource(string $value): self
+    {
+        return $this->setParameter('source', $value);
+    }
+
     /**
      * @inheritDoc
      */
@@ -18,10 +28,16 @@ class PurchaseRequest extends AbstractRequest
 
         $data = [
             'amount' => $this->getAmountInteger(),
-            'billing' => $this->addBillingData(),
-            'card' => $this->getCardDetails(),
             'currency' => $this->getCurrency(),
         ];
+
+        $source = $this->getSource();
+        if ($source) {
+            $data['source'] = $source;
+        } else {
+            $data['billing'] = $this->addBillingData();
+            $data['card'] = $this->getCardDetails();
+        }
 
         return $data;
     }
