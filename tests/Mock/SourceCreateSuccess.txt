@@ -1,0 +1,16 @@
+HTTP/1.1 201 Created
+Server: nginx/1.18.0 (Ubuntu)
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+Cache-Control: no-cache, private
+Date: Fri, 22 Apr 2022 12:45:28 GMT
+
+{
+    "data":{
+        "id":"2cc406f0-50af-47af-aeff-dfd2a0679a8c",
+        "created":"2022-04-22T12:45:28.000000Z"
+    },
+    "type":"object",
+    "url":"/sources"
+}

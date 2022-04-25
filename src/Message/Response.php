@@ -42,4 +42,9 @@ class Response extends AbstractResponse
     {
         return $this->data['data']['id'] ?? null;
     }
+
+    public function getSourceReference()
+    {
+        return $this->data['data']['id'] ?? null;
+    }
 }
