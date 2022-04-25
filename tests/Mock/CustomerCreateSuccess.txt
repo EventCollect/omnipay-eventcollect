@@ -1,0 +1,19 @@
+HTTP/1.1 200 OK
+Server: nginx/1.18.0 (Ubuntu)
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+Cache-Control: no-cache, private
+Date: Wed, 20 Apr 2022 19:58:52 GMT
+
+{
+    "data":{
+        "id":"6d791c66-2336-4623-b5ea-cc03964ac9e5",
+        "created":"2022-03-30T21:24:41.000000Z",
+        "email":"developer@eventconnect.io",
+        "first":"EventConnect",
+        "last":"Developer"
+    },
+    "type":"object",
+    "url":"/customers"
+}

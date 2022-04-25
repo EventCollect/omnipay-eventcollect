@@ -5,6 +5,7 @@ namespace Omnipay\EventCollect;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Message\NotificationInterface;
 use Omnipay\Common\Message\RequestInterface;
+use Omnipay\EventCollect\Message\CustomerCreateRequest;
 use Omnipay\EventCollect\Message\PurchaseRequest;
 
 /**
@@ -49,6 +50,11 @@ class Gateway extends AbstractGateway
     public function setApiKey($value): Gateway
     {
         return $this->setParameter('api_key', $value);
+    }
+
+    public function createCustomer(array $options = [])
+    {
+        return $this->createRequest(CustomerCreateRequest::class, $options);
     }
 
     public function purchase(array $options = [])
