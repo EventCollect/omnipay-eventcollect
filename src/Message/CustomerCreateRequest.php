@@ -21,39 +21,21 @@ class CustomerCreateRequest extends AbstractRequest
         return $this->setParameter('email', $value);
     }
 
-    public function getFirstName(): string
-    {
-        return $this->getParameter('first_name');
-    }
-
-    public function setFirstName(string $value): self
-    {
-        return $this->setParameter('first_name', $value);
-    }
-
-    public function getLastName(): string
-    {
-        return $this->getParameter('last_name');
-    }
-
-    public function setLastName(string $value): self
-    {
-        return $this->setParameter('last_name', $value);
-    }
-
     /**
      * @return string[]
      * @throws InvalidRequestException
      */
     public function getData(): array
     {
-        $this->validate('email', 'first_name', 'last_name');
+        $this->validate('email');
+
+        $creditCard = $this->getCard();
 
         return [
             'billing' => $this->addBillingData(),
             'email' => $this->getEmail(),
-            'first' => $this->getFirstName(),
-            'last' => $this->getLastName(),
+            'first' => $creditCard->getBillingFirstName(),
+            'last' => $creditCard->getBillingLastName(),
         ];
     }
 

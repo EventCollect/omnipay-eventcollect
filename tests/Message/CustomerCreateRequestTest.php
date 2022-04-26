@@ -2,6 +2,7 @@
 
 namespace League\EventCollect\Test\Message;
 
+use Omnipay\Common\CreditCard;
 use Omnipay\EventCollect\Message\CustomerCreateRequest;
 use Omnipay\Tests\TestCase;
 
@@ -15,9 +16,8 @@ class CustomerCreateRequestTest extends TestCase
 
         $this->request = new CustomerCreateRequest($this->getHttpClient(), $this->getHttpRequest());
         $this->request->initialize([
+            'card' => new CreditCard($this->getValidCard()),
             'email' => 'developer@eventconnect.io',
-            'first_name' => 'EventConnect',
-            'last_name' => 'Developer',
         ]);
     }
 
