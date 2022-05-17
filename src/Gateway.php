@@ -19,7 +19,6 @@ use Omnipay\EventCollect\Message\SourceUpdateRequest;
  * @method RequestInterface refund(array $options = array())
  * @method RequestInterface fetchTransaction(array $options = [])
  * @method RequestInterface void(array $options = array())
- * @method RequestInterface createCard(array $options = array())
  * @method RequestInterface deleteCard(array $options = array())
  */
 class Gateway extends AbstractGateway
@@ -58,7 +57,7 @@ class Gateway extends AbstractGateway
         return $this->createRequest(CustomerCreateRequest::class, $options);
     }
 
-    public function createSource(array $options = [])
+    public function createCard(array $options = [])
     {
         return $this->createRequest(SourceCreateRequest::class, $options);
     }
@@ -83,7 +82,6 @@ class Gateway extends AbstractGateway
         // TODO: Implement @method RequestInterface refund(array $options = array())
         // TODO: Implement @method RequestInterface fetchTransaction(array $options = [])
         // TODO: Implement @method RequestInterface void(array $options = array())
-        // TODO: Implement @method RequestInterface createCard(array $options = array())
         // TODO: Implement @method RequestInterface deleteCard(array $options = array())
     }
 }
