@@ -4,7 +4,7 @@ namespace Omnipay\EventCollect\Message;
 
 use Omnipay\Common\Message\AbstractRequest as BaseAbstractRequest;
 
-class AbstractRequest extends BaseAbstractRequest
+abstract class AbstractRequest extends BaseAbstractRequest
 {
 
     protected $liveEndpoint = 'https://api.eventcollect.io';
@@ -29,12 +29,24 @@ class AbstractRequest extends BaseAbstractRequest
         return $this->liveEndpoint;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getData()
+    public function getCustomer(): ?string
     {
-        // TODO: Implement getData() method.
+        return $this->getParameter('customer');
+    }
+
+    public function setCustomer(string $value): self
+    {
+        return $this->setParameter('customer', $value);
+    }
+
+    public function getSource(): ?string
+    {
+        return $this->getParameter('source');
+    }
+
+    public function setSource(string $value): self
+    {
+        return $this->setParameter('source', $value);
     }
 
     /**
