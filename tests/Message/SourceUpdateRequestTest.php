@@ -8,6 +8,7 @@ use Omnipay\Tests\TestCase;
 
 class SourceUpdateRequestTest extends TestCase
 {
+    private $card;
     private $request;
 
     protected function setUp(): void
@@ -15,8 +16,10 @@ class SourceUpdateRequestTest extends TestCase
         parent::setUp();
 
         $this->request = new SourceUpdateRequest($this->getHttpClient(), $this->getHttpRequest());
+        $this->card = new CreditCard($this->getValidCard());
+
         $this->request->initialize([
-            'card' => new CreditCard($this->getValidCard()),
+            'card' => $this->card,
             'source' => 'fe3f7dfc-3612-49f9-96b6-d2d1c75cf75b',
         ]);
     }
@@ -25,6 +28,22 @@ class SourceUpdateRequestTest extends TestCase
     {
         $expected = 'https://api.eventcollect.io/sources/fe3f7dfc-3612-49f9-96b6-d2d1c75cf75b';
         $actual = $this->request->getEndpoint();
+        $this->assertSame($expected, $actual);
+    }
+
+    public function testGetData(): void
+    {
+        $expected = [
+            'first' => $this->card->getBillingFirstName(),
+            'last' => $this->card->getBillingLastName(),
+            'card' => [
+                'exp_month' => $this->card->getExpiryMonth(),
+                'exp_year' => $this->card->getExpiryYear(),
+                'cvc' => $this->card->getCvv(),
+                'number' => $this->card->getNumber(),
+            ],
+        ];
+        $actual = $this->request->getData();
         $this->assertSame($expected, $actual);
     }
 
