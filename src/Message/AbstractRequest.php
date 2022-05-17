@@ -4,7 +4,7 @@ namespace Omnipay\EventCollect\Message;
 
 use Omnipay\Common\Message\AbstractRequest as BaseAbstractRequest;
 
-class AbstractRequest extends BaseAbstractRequest
+abstract class AbstractRequest extends BaseAbstractRequest
 {
 
     protected $liveEndpoint = 'https://event-collect-api-itfys.ondigitalocean.app';
@@ -27,14 +27,6 @@ class AbstractRequest extends BaseAbstractRequest
         }
 
         return $this->liveEndpoint;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getData()
-    {
-        // TODO: Implement getData() method.
     }
 
     /**
