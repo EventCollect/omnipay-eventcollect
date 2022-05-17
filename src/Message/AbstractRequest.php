@@ -29,6 +29,16 @@ abstract class AbstractRequest extends BaseAbstractRequest
         return $this->liveEndpoint;
     }
 
+    public function getSource(): ?string
+    {
+        return $this->getParameter('source');
+    }
+
+    public function setSource(string $value): self
+    {
+        return $this->setParameter('source', $value);
+    }
+
     /**
      * @inheritDoc
      */

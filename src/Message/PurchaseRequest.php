@@ -9,16 +9,6 @@ class PurchaseRequest extends AbstractRequest
         return sprintf('%s/charges', parent::getEndpoint());
     }
 
-    public function getSource(): ?string
-    {
-        return $this->getParameter('source');
-    }
-
-    public function setSource(string $value): self
-    {
-        return $this->setParameter('source', $value);
-    }
-
     /**
      * @inheritDoc
      */
