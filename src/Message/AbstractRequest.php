@@ -29,6 +29,16 @@ abstract class AbstractRequest extends BaseAbstractRequest
         return $this->liveEndpoint;
     }
 
+    public function getCustomer(): ?string
+    {
+        return $this->getParameter('customer');
+    }
+
+    public function setCustomer(string $value): self
+    {
+        return $this->setParameter('customer', $value);
+    }
+
     public function getSource(): ?string
     {
         return $this->getParameter('source');
