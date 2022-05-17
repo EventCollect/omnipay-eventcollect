@@ -7,8 +7,8 @@ use Omnipay\Common\Message\AbstractRequest as BaseAbstractRequest;
 class AbstractRequest extends BaseAbstractRequest
 {
 
-    protected $liveEndpoint = 'https://event-collect-api-itfys.ondigitalocean.app';
-    protected $testEndpoint = 'https://event-collect-api-itfys.ondigitalocean.app';
+    protected $liveEndpoint = 'https://api.eventcollect.io';
+    protected $testEndpoint = 'https://api.eventcollect.test';
 
     public function getApiKey(): ?string
     {
