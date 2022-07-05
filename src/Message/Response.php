@@ -12,22 +12,21 @@ class Response extends AbstractResponse
      */
     public function isSuccessful(): bool
     {
-        return isset($this->data['data']['id']);
+        return isset($this->data['data']['id']) && ! $this->getMessage();
     }
 
-    public function getMessage()
+    /**
+     * @inheritDoc
+     */
+    public function getMessage(): ?string
     {
-        if (empty($this->data['errors'])) {
-            return null;
-        }
+        $errors = $this->data['errors']
+            ?? $this->data['data']['errors']
+            ?? [];
 
-        $firstErrorGroup = current($this->data['errors']);
-
-        if ($firstErrorGroup === false) {
-            return null;
-        }
-
-        return $firstErrorGroup[0];
+        return current($errors)[0]
+            ?? $this->data['message']
+            ?? null;
     }
 
     /**
