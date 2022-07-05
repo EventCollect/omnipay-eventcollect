@@ -1,0 +1,20 @@
+HTTP/1.1 422 Unprocessable Entity
+Server: nginx/1.18.0 (Ubuntu)
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+Cache-Control: no-cache, private
+Date: Mon, 4 Jul 2022 12:02:32 GMT
+
+{
+    "data": {
+        "id": "b3bd9a0e-7c78-4c84-96b6-2899f60f3121",
+        "errors": {
+            "allow_partial_disabled": [
+                "Transaction declined: Total amount not approved"
+            ]
+        }
+    },
+    "type": "object",
+    "url": "/charges"
+}
