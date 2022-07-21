@@ -9,6 +9,11 @@ class SourceUpdateRequest extends AbstractRequest
         return sprintf('%s/sources/%s', parent::getEndpoint(), $this->getSource());
     }
 
+    protected function getHttpMethod(): string
+    {
+        return 'PUT';
+    }
+
     /**
      * TODO
      */
