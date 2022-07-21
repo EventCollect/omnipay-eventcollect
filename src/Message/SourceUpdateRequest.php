@@ -26,8 +26,10 @@ class SourceUpdateRequest extends AbstractRequest
         }
 
         return [
-            'first' => $card->getBillingFirstName(),
-            'last' => $card->getBillingLastName(),
+            'billing' => [
+                'first' => $card->getBillingFirstName(),
+                'last' => $card->getBillingLastName(),
+            ],
             'card' => [
                 'exp_month' => $card->getExpiryMonth(),
                 'exp_year' => $card->getExpiryYear(),
