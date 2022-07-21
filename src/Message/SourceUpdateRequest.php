@@ -9,6 +9,11 @@ class SourceUpdateRequest extends AbstractRequest
         return sprintf('%s/sources/%s', parent::getEndpoint(), $this->getSource());
     }
 
+    protected function getHttpMethod(): string
+    {
+        return 'PUT';
+    }
+
     /**
      * TODO
      */
@@ -21,8 +26,10 @@ class SourceUpdateRequest extends AbstractRequest
         }
 
         return [
-            'first' => $card->getBillingFirstName(),
-            'last' => $card->getBillingLastName(),
+            'billing' => [
+                'first' => $card->getBillingFirstName(),
+                'last' => $card->getBillingLastName(),
+            ],
             'card' => [
                 'exp_month' => $card->getExpiryMonth(),
                 'exp_year' => $card->getExpiryYear(),

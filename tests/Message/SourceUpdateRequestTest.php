@@ -34,8 +34,10 @@ class SourceUpdateRequestTest extends TestCase
     public function testGetData(): void
     {
         $expected = [
-            'first' => $this->card->getBillingFirstName(),
-            'last' => $this->card->getBillingLastName(),
+            'billing' => [
+                'first' => $this->card->getBillingFirstName(),
+                'last' => $this->card->getBillingLastName(),
+            ],
             'card' => [
                 'exp_month' => $this->card->getExpiryMonth(),
                 'exp_year' => $this->card->getExpiryYear(),

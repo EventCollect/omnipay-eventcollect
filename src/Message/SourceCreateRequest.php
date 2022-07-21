@@ -46,7 +46,13 @@ class SourceCreateRequest extends AbstractRequest
     {
         $this->validate('customer');
 
+        $card = $this->getCard();
+
         return [
+            'billing' => [
+                'first' => $card->getBillingFirstName(),
+                'last' => $card->getBillingLastName(),
+            ],
             'card' => $this->getCardDetails(),
             'customer' => $this->getCustomer(),
         ];

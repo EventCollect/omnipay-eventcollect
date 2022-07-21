@@ -29,6 +29,11 @@ abstract class AbstractRequest extends BaseAbstractRequest
         return $this->liveEndpoint;
     }
 
+    protected function getHttpMethod(): string
+    {
+        return 'POST';
+    }
+
     public function getCustomer(): ?string
     {
         return $this->getParameter('customer');
@@ -62,7 +67,7 @@ abstract class AbstractRequest extends BaseAbstractRequest
             'Content-Type' => 'application/json',
         ];
 
-        $response = $this->httpClient->request('POST', $endpoint, $headers, json_encode($data));
+        $response = $this->httpClient->request($this->getHttpMethod(), $endpoint, $headers, json_encode($data));
 
         $responseBody = json_decode($response->getBody(), true);
 
