@@ -42,12 +42,55 @@ class PurchaseRequestTest extends TestCase
         $this->assertFalse($response->isSuccessful());
         $this->assertSame('The selected currency (USD) is invalid for this transaction.', $response->getMessage());
     }
-/*
-    public function testGetData()
-    {
-        $data = $this->request->getData();
 
-        $this->assertSame('9.99', $data['amount']);
+    public function testDataWithImplicitItems(): void
+    {
+        $this->request->setAmount(9.99);
+
+        $expected = [
+            [
+                'description' => 'Default item',
+                'quantity' => 1,
+                'amount' => 999,
+            ],
+        ];
+        [ 'items' => $actual ] = $this->request->getData();
+
+        $this->assertEquals($expected, $actual);
     }
-*/
+
+    public function testDataWithExplicitItems(): void
+    {
+        $this->request->setAmount(9.99);
+        $this->request->setItems([
+            [
+                'name' => 'name',
+                'description' => 'description',
+                'quantity' => 1,
+                'price' => 999,
+            ],
+            [
+                'name' => 'name',
+                'description' => 'description',
+                'quantity' => 2,
+                'price' => 999,
+            ],
+        ]);
+
+        $expected = [
+            [
+                'description' => 'description',
+                'quantity' => 1,
+                'amount' => 999,
+            ],
+            [
+                'description' => 'description',
+                'quantity' => 2,
+                'amount' => 999,
+            ],
+        ];
+        [ 'items' => $actual ] = $this->request->getData();
+
+        $this->assertEquals($expected, $actual);
+    }
 }
