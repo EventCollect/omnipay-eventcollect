@@ -29,6 +29,22 @@ class PurchaseRequest extends AbstractRequest
             $data['card'] = $this->getCardDetails();
         }
 
+        if ($items = $this->getItems()) {
+            foreach ($items as $item) {
+                $data['items'][] = [
+                    'description' => $item->getDescription(),
+                    'quantity' => $item->getQuantity(),
+                    'amount' => $item->getPrice(),
+                ];
+            }
+        } else {
+            $data['items'][] = [
+                'description' => 'Default item',
+                'quantity' => 1,
+                'amount' => $data['amount'],
+            ];
+        }
+
         return $data;
     }
 
