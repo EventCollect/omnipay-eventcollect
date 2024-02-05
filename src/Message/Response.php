@@ -2,10 +2,23 @@
 
 namespace Omnipay\EventCollect\Message;
 
+use JsonException;
 use Omnipay\Common\Message\AbstractResponse;
+use Omnipay\Common\Message\RequestInterface;
 
 class Response extends AbstractResponse
 {
+    /**
+     * @throws JsonException
+     */
+    public function __construct(RequestInterface $request, $data)
+    {
+        if (is_string($data)) {
+            $data = json_decode($data, true, 16, JSON_THROW_ON_ERROR);
+        }
+
+        parent::__construct($request, $data);
+    }
 
     /**
      * @inheritDoc
