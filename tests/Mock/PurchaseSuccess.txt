@@ -10,6 +10,7 @@ Date: Wed, 11 Aug 2021 17:41:07 GMT
     "data": {
         "id": "b6ae47cd-7113-442b-a7e5-34b8b6138636",
         "amount": 9.99,
+        "description":"Lorem ipsum dolor sit amet",
         "created": 1628703667,
         "currency": null,
         "invoice": {
