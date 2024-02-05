@@ -2,21 +2,16 @@
 
 namespace League\EventCollect\Test\Message;
 
-use Omnipay\Common\CreditCard;
 use Omnipay\EventCollect\Message\PurchaseRequest;
 use Omnipay\Tests\TestCase;
 
 class PurchaseRequestTest extends TestCase
 {
-    private PurchaseRequest $request;
-
     protected function setUp(): void
     {
-        parent::setUp();
-
         $this->request = new PurchaseRequest($this->getHttpClient(), $this->getHttpRequest());
         $this->request->initialize([
-            'card' => new CreditCard($this->getValidCard()),
+            'card' => $this->getValidCard(),
         ]);
     }
 

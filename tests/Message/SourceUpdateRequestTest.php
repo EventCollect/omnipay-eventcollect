@@ -2,21 +2,15 @@
 
 namespace League\EventCollect\Test\Message;
 
-use Omnipay\Common\CreditCard;
 use Omnipay\EventCollect\Message\SourceUpdateRequest;
 use Omnipay\Tests\TestCase;
 
 class SourceUpdateRequestTest extends TestCase
 {
-    private $card;
-    private $request;
-
     protected function setUp(): void
     {
-        parent::setUp();
-
         $this->request = new SourceUpdateRequest($this->getHttpClient(), $this->getHttpRequest());
-        $this->card = new CreditCard($this->getValidCard());
+        $this->card = $this->getValidCard();
 
         $this->request->initialize([
             'card' => $this->card,
@@ -35,14 +29,14 @@ class SourceUpdateRequestTest extends TestCase
     {
         $expected = [
             'billing' => [
-                'first' => $this->card->getBillingFirstName(),
-                'last' => $this->card->getBillingLastName(),
+                'first' => $this->card['firstName'],
+                'last' => $this->card['lastName'],
             ],
             'card' => [
-                'exp_month' => $this->card->getExpiryMonth(),
-                'exp_year' => $this->card->getExpiryYear(),
-                'cvc' => $this->card->getCvv(),
-                'number' => $this->card->getNumber(),
+                'exp_month' => $this->card['expiryMonth'],
+                'exp_year' => $this->card['expiryYear'],
+                'cvc' => $this->card['cvv'],
+                'number' => $this->card['number'],
             ],
         ];
         $actual = $this->request->getData();

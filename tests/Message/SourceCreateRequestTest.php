@@ -2,21 +2,16 @@
 
 namespace League\EventCollect\Test\Message;
 
-use Omnipay\Common\CreditCard;
 use Omnipay\EventCollect\Message\SourceCreateRequest;
 use Omnipay\Tests\TestCase;
 
 class SourceCreateRequestTest extends TestCase
 {
-    private $request;
-
     protected function setUp(): void
     {
-        parent::setUp();
-
         $this->request = new SourceCreateRequest($this->getHttpClient(), $this->getHttpRequest());
         $this->request->initialize([
-            'card' => new CreditCard($this->getValidCard()),
+            'card' => $this->getValidCard(),
             'customer' => 'fe3f7dfc-3612-49f9-96b6-d2d1c75cf75b',
         ]);
     }
