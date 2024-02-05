@@ -10,7 +10,8 @@
     "authors": [],
     "require": {
         "php": ">=7.4",
-        "omnipay/common": "^3"
+        "omnipay/common": "^3",
+        "ext-json": "*"
     },
     "require-dev": {
         "omnipay/tests": "^4.1",
@@ -38,5 +39,10 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "phpro/grumphp": true
+        }
+    }
 }
