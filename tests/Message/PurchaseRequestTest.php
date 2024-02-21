@@ -11,13 +11,14 @@ class PurchaseRequestTest extends TestCase
     {
         $this->request = new PurchaseRequest($this->getHttpClient(), $this->getHttpRequest());
         $this->request->initialize([
-            'card' => $this->getValidCard(),
+            'amount' => 1,
         ]);
     }
 
     public function testSendSuccess(): void
     {
         $this->request->setAmount(9.99);
+        $this->request->setCard($this->getValidCard());
 
         $this->setMockHttpResponse('PurchaseSuccess.txt');
         $response = $this->request->send();
@@ -29,6 +30,7 @@ class PurchaseRequestTest extends TestCase
     public function testSendFailure(): void
     {
         $this->request->setAmount(9.99);
+        $this->request->setCard($this->getValidCard());
         $this->request->setCurrency('USD');
 
         $this->setMockHttpResponse('PurchaseFailure.txt');
@@ -41,6 +43,7 @@ class PurchaseRequestTest extends TestCase
     public function testDataWithImplicitItems(): void
     {
         $this->request->setAmount(9.99);
+        $this->request->setCard($this->getValidCard());
 
         $expected = [
             [
@@ -57,6 +60,7 @@ class PurchaseRequestTest extends TestCase
     public function testDataWithExplicitItems(): void
     {
         $this->request->setAmount(9.99);
+        $this->request->setCard($this->getValidCard());
         $this->request->setItems([
             [
                 'name' => 'name',
@@ -87,5 +91,26 @@ class PurchaseRequestTest extends TestCase
         [ 'items' => $actual ] = $this->request->getData();
 
         $this->assertEquals($expected, $actual);
+    }
+
+    public function testDataWithSource(): void
+    {
+        $this->request->setSource('source');
+
+        $data = $this->request->getData();
+
+        $this->assertSame('source', $data['source']);
+    }
+
+    public function testDataWithBilling(): void
+    {
+        $this->request->setSource('source');
+        $this->request->setBillingFirstName('First');
+        $this->request->setBillingAddress1('Address 1');
+
+        $data = $this->request->getData();
+
+        $this->assertSame('First', $data['billing']['first']);
+        $this->assertSame('Address 1', $data['billing']['address']['line1']);
     }
 }

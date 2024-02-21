@@ -2,8 +2,12 @@
 
 namespace Omnipay\EventCollect\Message;
 
+use Omnipay\EventCollect\Message\Traits\HasBillingData;
+
 class PurchaseRequest extends AbstractRequest
 {
+    use HasBillingData;
+
     protected function getEndpoint(): string
     {
         return sprintf('%s/charges', parent::getEndpoint());
@@ -15,19 +19,20 @@ class PurchaseRequest extends AbstractRequest
     public function getData(): array
     {
         $this->validate('amount');
+
         $data = [
             'amount' => $this->getAmountInteger(),
             'currency' => $this->getCurrency(),
             'description' => $this->getDescription(),
         ];
 
-        $source = $this->getSource();
-        if ($source) {
+        if ($source = $this->getSource()) {
             $data['source'] = $source;
         } else {
-            $data['billing'] = $this->addBillingData();
             $data['card'] = $this->getCardDetails();
         }
+
+        $data['billing'] = $this->addBillingData();
 
         if ($items = $this->getItems()) {
             foreach ($items as $item) {
@@ -81,8 +86,23 @@ class PurchaseRequest extends AbstractRequest
     protected function addBillingData(): array
     {
         $creditCard = $this->getCard();
-        if (!$creditCard) {
-            return [];
+
+        if (! $creditCard) {
+            return array_filter([
+                'address' => array_filter([
+                    'line1' => $this->getBillingAddress1(),
+                    'line2' => $this->getBillingAddress2(),
+                    'city' => $this->getBillingCity(),
+                    'postal_code' => $this->getBillingPostcode(),
+                    'state' => $this->getBillingState(),
+                    'country' => $this->getBillingCountry(),
+                ]),
+                'company' => $this->getBillingCompany(),
+                'email' => $this->getEmail(),
+                'first' => $this->getBillingFirstName(),
+                'last' => $this->getBillingLastName(),
+                'phone' => $this->getBillingPhone(),
+            ]);
         }
 
         return array_filter([
