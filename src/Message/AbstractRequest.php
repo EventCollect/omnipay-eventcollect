@@ -6,7 +6,6 @@ use Omnipay\Common\Message\AbstractRequest as BaseAbstractRequest;
 
 abstract class AbstractRequest extends BaseAbstractRequest
 {
-
     protected $liveEndpoint = 'https://api.eventcollect.io';
     protected $testEndpoint = 'https://apitest.eventcollect.io';
 
@@ -42,6 +41,16 @@ abstract class AbstractRequest extends BaseAbstractRequest
     public function setCustomer(string $value): self
     {
         return $this->setParameter('customer', $value);
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->getParameter('email');
+    }
+
+    public function setEmail(string $value): self
+    {
+        return $this->setParameter('email', $value);
     }
 
     public function getSource(): ?string

@@ -11,16 +11,6 @@ class CustomerCreateRequest extends AbstractRequest
         return sprintf('%s/customers', parent::getEndpoint());
     }
 
-    public function getEmail(): string
-    {
-        return $this->getParameter('email');
-    }
-
-    public function setEmail(string $value): self
-    {
-        return $this->setParameter('email', $value);
-    }
-
     /**
      * @return string[]
      * @throws InvalidRequestException
