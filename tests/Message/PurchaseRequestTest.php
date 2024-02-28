@@ -66,7 +66,7 @@ class PurchaseRequestTest extends TestCase
                 'name' => 'name',
                 'description' => 'description',
                 'quantity' => 1,
-                'price' => 999,
+                'price' => 9.99,
             ],
             [
                 'name' => 'name',
