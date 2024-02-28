@@ -2,6 +2,7 @@
 
 namespace Omnipay\EventCollect\Message;
 
+use Omnipay\EventCollect\ItemBag;
 use Omnipay\EventCollect\Message\Traits\HasBillingData;
 
 class PurchaseRequest extends AbstractRequest
@@ -11,6 +12,15 @@ class PurchaseRequest extends AbstractRequest
     protected function getEndpoint(): string
     {
         return sprintf('%s/charges', parent::getEndpoint());
+    }
+
+    public function setItems($items): self
+    {
+        if ($items && !$items instanceof ItemBag) {
+            $items = new ItemBag($items);
+        }
+
+        return $this->setParameter('items', $items);
     }
 
     /**
@@ -39,7 +49,7 @@ class PurchaseRequest extends AbstractRequest
                 $data['items'][] = [
                     'description' => $item->getDescription(),
                     'quantity' => $item->getQuantity(),
-                    'amount' => $item->getPrice(),
+                    'amount' => $item->getPriceInteger(),
                 ];
             }
         } else {
