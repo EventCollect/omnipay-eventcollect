@@ -85,7 +85,7 @@ class PurchaseRequestTest extends TestCase
             [
                 'description' => 'description',
                 'quantity' => 2,
-                'amount' => 999,
+                'amount' => 99900,
             ],
         ];
         [ 'items' => $actual ] = $this->request->getData();
