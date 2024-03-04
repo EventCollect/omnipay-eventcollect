@@ -8,10 +8,6 @@ class Item extends \Omnipay\Common\Item
     {
         $price = $this->getPrice();
 
-        if (is_int($price)) {
-            return $price;
-        }
-
         return $price * 100;
     }
 }
