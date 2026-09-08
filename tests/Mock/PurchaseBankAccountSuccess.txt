@@ -1,0 +1,27 @@
+HTTP/1.1 201 Created
+Server: nginx/1.18.0 (Ubuntu)
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+Cache-Control: no-cache, private
+Date: Fri, 04 Sep 2026 14:22:10 GMT
+
+{
+    "data": {
+        "id": "8f4d1e02-5b7c-4a19-9e63-2c8f0a5d7b31",
+        "created": "2026-09-04T14:22:10.000000Z",
+        "type": "charge",
+        "status_id": 2,
+        "payment_method_id": 5,
+        "payment_method": {
+            "id": 5,
+            "label": "ACH"
+        },
+        "amount": 50.00,
+        "fees_amount": 0,
+        "url": "https://apitest.eventcollect.io/charges/8f4d1e02-5b7c-4a19-9e63-2c8f0a5d7b31",
+        "external_id": "t1_txn_6a29c4f8b3e1d05"
+    },
+    "type": "object",
+    "url": "https://apitest.eventcollect.io/charges"
+}
