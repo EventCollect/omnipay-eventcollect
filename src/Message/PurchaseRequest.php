@@ -2,6 +2,7 @@
 
 namespace Omnipay\EventCollect\Message;
 
+use Omnipay\Common\CreditCard;
 use Omnipay\Common\Exception\InvalidRequestException;
 use Omnipay\EventCollect\BankAccount;
 use Omnipay\EventCollect\Exception\InvalidBankAccountException;
@@ -69,7 +70,7 @@ class PurchaseRequest extends AbstractRequest
             $data['card'] = $this->getCardDetails();
         }
 
-        $data['billing'] = $this->addBillingData();
+        $data['billing'] = $this->getBillingData();
 
         if ($items = $this->getItems()) {
             foreach ($items as $item) {
@@ -99,7 +100,9 @@ class PurchaseRequest extends AbstractRequest
     }
 
     /**
-     * TODO
+     * Get the card data.
+     *
+     * @throws InvalidRequestException
      */
     private function getCardDetails(): array
     {
@@ -116,7 +119,7 @@ class PurchaseRequest extends AbstractRequest
     }
 
     /**
-     * Builds the bank account payload.
+     * Get the bank account data.
      *
      * @throws InvalidBankAccountException|InvalidRequestException
      */
@@ -136,46 +139,27 @@ class PurchaseRequest extends AbstractRequest
     }
 
     /**
-     * Adds the billing data.
-     *
-     * @return array
+     * Get the billing data.
      */
-    protected function addBillingData(): array
+    protected function getBillingData(): array
     {
-        $creditCard = $this->getCard();
-
-        if (! $creditCard) {
-            return array_filter([
-                'address' => array_filter([
-                    'line1' => $this->getBillingAddress1(),
-                    'line2' => $this->getBillingAddress2(),
-                    'city' => $this->getBillingCity(),
-                    'postal_code' => $this->getBillingPostcode(),
-                    'state' => $this->getBillingState(),
-                    'country' => $this->getBillingCountry(),
-                ]),
-                'company' => $this->getBillingCompany(),
-                'email' => $this->getEmail(),
-                'first' => $this->getBillingFirstName(),
-                'last' => $this->getBillingLastName(),
-                'phone' => $this->getBillingPhone(),
-            ]);
-        }
+        /** @var CreditCard|self $billingSource */
+        $billingSource = $this->getCard() ?? $this;
 
         return array_filter([
             'address' => array_filter([
-                'line1' => $creditCard->getBillingAddress1(),
-                'line2' => $creditCard->getBillingAddress2(),
-                'city' => $creditCard->getBillingCity(),
-                'postal_code' => $creditCard->getBillingPostcode(),
-                'state' => $creditCard->getBillingState(),
-                'country' => $creditCard->getBillingCountry(),
+                'line1' => $billingSource->getBillingAddress1(),
+                'line2' => $billingSource->getBillingAddress2(),
+                'city' => $billingSource->getBillingCity(),
+                'postal_code' => $billingSource->getBillingPostcode(),
+                'state' => $billingSource->getBillingState(),
+                'country' => $billingSource->getBillingCountry(),
             ]),
-            'company' => $creditCard->getBillingCompany(),
-            'email' => $creditCard->getEmail(),
-            'first' => $creditCard->getBillingFirstName(),
-            'last' => $creditCard->getBillingLastName(),
-            'phone' => $creditCard->getBillingPhone(),
+            'company' => $billingSource->getBillingCompany(),
+            'email' => $billingSource->getEmail(),
+            'first' => $billingSource->getBillingFirstName(),
+            'last' => $billingSource->getBillingLastName(),
+            'phone' => $billingSource->getBillingPhone(),
         ]);
     }
 }
