@@ -2,6 +2,9 @@
 
 namespace Omnipay\EventCollect\Message;
 
+use Omnipay\Common\Exception\InvalidRequestException;
+use Omnipay\EventCollect\BankAccount;
+use Omnipay\EventCollect\Exception\InvalidBankAccountException;
 use Omnipay\EventCollect\ItemBag;
 use Omnipay\EventCollect\Message\Traits\HasBillingData;
 
@@ -24,6 +27,28 @@ class PurchaseRequest extends AbstractRequest
     }
 
     /**
+     * Get the bank account to charge.
+     */
+    public function getBankAccount(): ?BankAccount
+    {
+        return $this->getParameter('bankAccount');
+    }
+
+    /**
+     * Sets the bank account to charge.
+     *
+     * @param BankAccount|array $value
+     */
+    public function setBankAccount($value): self
+    {
+        if ($value && ! $value instanceof BankAccount) {
+            $value = new BankAccount($value);
+        }
+
+        return $this->setParameter('bankAccount', $value);
+    }
+
+    /**
      * @inheritDoc
      */
     public function getData(): array
@@ -38,6 +63,8 @@ class PurchaseRequest extends AbstractRequest
 
         if ($source = $this->getSource()) {
             $data['source'] = $source;
+        } elseif ($this->getBankAccount()) {
+            $data['bank_account'] = $this->getBankAccountDetails();
         } else {
             $data['card'] = $this->getCardDetails();
         }
@@ -85,6 +112,26 @@ class PurchaseRequest extends AbstractRequest
             'exp_year' => $card->getExpiryYear(),
             'cvc' => $card->getCvv(),
             'number' => $card->getNumber(),
+        ];
+    }
+
+    /**
+     * Builds the bank account payload.
+     *
+     * @throws InvalidBankAccountException|InvalidRequestException
+     */
+    private function getBankAccountDetails(): array
+    {
+        $this->validate('bankAccount');
+
+        $bankAccount = $this->getBankAccount();
+        $bankAccount->validate($this->getCurrency());
+
+        return [
+            'account_number' => $bankAccount->getAccountNumber(),
+            'routing_number' => $bankAccount->getRoutingNumber(),
+            'account_type' => $bankAccount->getAccountType(),
+            'account_holder_type' => $bankAccount->getAccountHolderType(),
         ];
     }
 
