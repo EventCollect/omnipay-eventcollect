@@ -27,6 +27,11 @@ class RefundRequestTest extends TestCase
         ], $data);
     }
 
+    public function testEndpoint(): void
+    {
+        $this->assertSame('https://api.eventcollect.io/refunds', $this->request->getEndpoint());
+    }
+
     public function testSendSuccess(): void
     {
         $this->setMockHttpResponse('RefundSuccess.txt');

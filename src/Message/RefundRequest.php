@@ -6,7 +6,7 @@ use Omnipay\Common\Exception\InvalidRequestException;
 
 class RefundRequest extends AbstractRequest
 {
-    protected function getEndpoint(): string
+    public function getEndpoint(): string
     {
         return sprintf('%s/refunds', parent::getEndpoint());
     }
