@@ -1,0 +1,24 @@
+HTTP/2.0 201 Created
+content-type: application/json
+date: Tue, 29 Sep 2026 17:22:50 GMT
+
+{
+  "data": {
+    "id": "f1a1ca36-a08d-40ca-adb0-bc6cf81f670e",
+    "created": "2026-09-29T17:22:47.000000Z",
+    "type": "refund",
+    "status_id": 1,
+    "payment_method_id": 5,
+    "payment_method": {
+      "id": 5,
+      "label": "ACH"
+    },
+    "amount": 1,
+    "fees_amount": null,
+    "for": "8e938e07-1d3b-4596-b0e2-d47a24b39960",
+    "url": "https://api.eventcollect.io/refunds/f1a1ca36-a08d-40ca-adb0-bc6cf81f670e",
+    "external_id": "t1_txn_6abbf3e9393644e8d51a1f7"
+  },
+  "type": "object",
+  "url": "https://api.eventcollect.io/refunds"
+}

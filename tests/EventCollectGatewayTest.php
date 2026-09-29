@@ -3,11 +3,11 @@
 namespace Omnipay\EventCollect;
 
 use Omnipay\EventCollect\Message\PurchaseRequest;
+use Omnipay\EventCollect\Message\RefundRequest;
 use Omnipay\Tests\GatewayTestCase;
 
 class EventCollectGatewayTest extends GatewayTestCase
 {
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -22,5 +22,14 @@ class EventCollectGatewayTest extends GatewayTestCase
         ]);
 
         $this->assertInstanceOf(PurchaseRequest::class, $request);
+    }
+
+    public function testRefund(): void
+    {
+        $request = $this->gateway->refund([
+            'amount' => 10,
+        ]);
+
+        $this->assertInstanceOf(RefundRequest::class, $request);
     }
 }

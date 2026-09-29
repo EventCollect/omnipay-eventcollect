@@ -1,0 +1,12 @@
+HTTP/2.0 422 Unprocessable Entity (WebDAV) (RFC 4918)
+content-type: application/json
+date: Tue, 29 Sep 2026 19:06:51 GMT
+
+{
+  "message": "The amount field is required.",
+  "errors": {
+    "amount": [
+      "The amount field is required."
+    ]
+  }
+}
