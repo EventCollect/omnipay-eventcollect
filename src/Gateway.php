@@ -7,6 +7,7 @@ use Omnipay\Common\Message\NotificationInterface;
 use Omnipay\Common\Message\RequestInterface;
 use Omnipay\EventCollect\Message\CustomerCreateRequest;
 use Omnipay\EventCollect\Message\PurchaseRequest;
+use Omnipay\EventCollect\Message\RefundRequest;
 use Omnipay\EventCollect\Message\SourceCreateRequest;
 use Omnipay\EventCollect\Message\SourceUpdateRequest;
 
@@ -16,14 +17,12 @@ use Omnipay\EventCollect\Message\SourceUpdateRequest;
  * @method RequestInterface completeAuthorize(array $options = array())
  * @method RequestInterface capture(array $options = array())
  * @method RequestInterface completePurchase(array $options = array())
- * @method RequestInterface refund(array $options = array())
  * @method RequestInterface fetchTransaction(array $options = [])
  * @method RequestInterface void(array $options = array())
  * @method RequestInterface deleteCard(array $options = array())
  */
 class Gateway extends AbstractGateway
 {
-
     /**
      * @inheritDoc
      */
@@ -72,6 +71,11 @@ class Gateway extends AbstractGateway
         return $this->createRequest(PurchaseRequest::class, $options);
     }
 
+    public function refund(array $options = [])
+    {
+        return $this->createRequest(RefundRequest::class, $options);
+    }
+
     public function __call($name, $arguments)
     {
         // TODO: Implement @method NotificationInterface acceptNotification(array $options = array())
@@ -79,7 +83,6 @@ class Gateway extends AbstractGateway
         // TODO: Implement @method RequestInterface completeAuthorize(array $options = array())
         // TODO: Implement @method RequestInterface capture(array $options = array())
         // TODO: Implement @method RequestInterface completePurchase(array $options = array())
-        // TODO: Implement @method RequestInterface refund(array $options = array())
         // TODO: Implement @method RequestInterface fetchTransaction(array $options = [])
         // TODO: Implement @method RequestInterface void(array $options = array())
         // TODO: Implement @method RequestInterface deleteCard(array $options = array())

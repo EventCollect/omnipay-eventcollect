@@ -80,6 +80,25 @@ Two further rules are enforced by the API rather than the driver, and surface th
 
 Bank accounts cannot be stored as payment sources, so `createCard()` and `updateCard()` remain card-only.
 
+### Refunds
+
+Refund a charge by passing its reference (from `$response->getTransactionReference()` on the purchase) and the amount to refund:
+
+```php
+$response = $gateway->refund([
+    'amount' => 10.00,
+    'transactionReference' => $chargeReference,
+])->send();
+
+if ($response->isSuccessful()) {
+    $refundReference = $response->getTransactionReference();
+} else {
+    throw new ApplicationException($response->getMessage());
+}
+```
+
+`amount` and `transactionReference` are both required; omitting either throws an `InvalidRequestException` before the request is sent.
+
 ## Support
 
 If you are having general issues with Omnipay, we suggest posting on [Stack Overflow](http://stackoverflow.com/). Be sure to add the [omnipay tag](http://stackoverflow.com/questions/tagged/omnipay) so it can be easily found.
