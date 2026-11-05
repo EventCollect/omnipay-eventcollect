@@ -78,6 +78,17 @@ Two further rules are enforced by the API rather than the driver, and surface th
 * ACH is available for `USD` and `CAD` only, and the currency must be enabled for bank account payments on your API key.
 * `billingCompany` is required when `accountHolderType` is `business`.
 
+When a bank account payment is declined and the customer must be shown an adverse action notice, `requiresAdverseActionNotice()` returns `true` and `getAdverseActionNotice()` returns the notice. The notice is HTML by default. Pass a format to request another one; the method returns `null` when the API doesn't supply that format.
+
+```php
+if ($response->requiresAdverseActionNotice()) {
+    $html = $response->getAdverseActionNotice();
+}
+```
+
+> [!NOTE]
+> `PurchaseResponse` implements `AdverseActionNoticeResponseInterface`, so an `instanceof` check works when the response type is not known.
+
 Bank accounts cannot be stored as payment sources, so `createCard()` and `updateCard()` remain card-only.
 
 ### Refunds
