@@ -189,6 +189,46 @@ class PurchaseRequestTest extends TestCase
         $this->assertSame('8f4d1e02-5b7c-4a19-9e63-2c8f0a5d7b31', $response->getTransactionReference());
     }
 
+    public function testSendBankAccountAdverseActionNotice(): void
+    {
+        $this->request->setAmount('50.00');
+        $this->request->setCurrency('USD');
+        $this->request->setBankAccount($this->getValidBankAccount());
+
+        $this->setMockHttpResponse('PurchaseAdverseActionNotice.txt');
+        $response = $this->request->send();
+
+        $this->assertFalse($response->isSuccessful());
+        $this->assertSame('Transaction processing failed', $response->getMessage());
+        $this->assertTrue($response->requiresAdverseActionNotice());
+        $this->assertSame('<p>Learn more about this declined transaction:</p>', $response->getAdverseActionNotice());
+    }
+
+    public function testAdverseActionNoticeUnavailableInFormat(): void
+    {
+        $this->request->setAmount('50.00');
+        $this->request->setCurrency('USD');
+        $this->request->setBankAccount($this->getValidBankAccount());
+
+        $this->setMockHttpResponse('PurchaseAdverseActionNotice.txt');
+        $response = $this->request->send();
+
+        $this->assertNull($response->getAdverseActionNotice('markdown'));
+    }
+
+    public function testSendFailureWithoutAdverseActionNotice(): void
+    {
+        $this->request->setAmount(9.99);
+        $this->request->setCard($this->getValidCard());
+        $this->request->setCurrency('USD');
+
+        $this->setMockHttpResponse('PurchaseFailure.txt');
+        $response = $this->request->send();
+
+        $this->assertFalse($response->requiresAdverseActionNotice());
+        $this->assertNull($response->getAdverseActionNotice());
+    }
+
     private function getValidBankAccount(): array
     {
         return [

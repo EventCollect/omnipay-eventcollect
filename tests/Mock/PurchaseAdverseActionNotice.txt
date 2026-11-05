@@ -1,0 +1,24 @@
+HTTP/1.1 422 Unprocessable Entity
+Server: nginx/1.18.0 (Ubuntu)
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+Cache-Control: no-cache, private
+Date: Wed, 04 Nov 2026 17:51:45 GMT
+
+{
+    "message": "The request could not be processed.",
+    "errors": {
+        "generic_error": [
+            "Transaction processing failed"
+        ]
+    },
+    "next_action": {
+        "type": "display_adverse_action_notice",
+        "display_adverse_action_notice": {
+            "html": "<p>Learn more about this declined transaction:</p>"
+        }
+    },
+    "type": "object",
+    "url": "https://api.eventcollect.io/charges"
+}
